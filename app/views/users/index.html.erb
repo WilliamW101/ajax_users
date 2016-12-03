@@ -1,0 +1,35 @@
+<div class='container'>
+
+<h1 class='new-font center'> Users </h1>
+<hr />
+<!-- Create Action  -->
+<form id='add-user-form' method='POST' action='api/v1/users'>
+  <label> User First Name </level>
+  <input id='user-firstName' type='text' name ='user[firstName]' required />
+  <br />
+
+  <label> User Last Name </label>
+  <input id='user-lastName' type='text' name='user[lastName]' required />
+  <br />
+
+  <label> User Phone Number </label>
+  <input id='user-phoneNumber' name ='user[phoneNumber]' />
+  <br />
+
+  <input type ='checkbox' id='user-alive' name ='user[alive]' />
+  <label for='user-alive'>User Alive? </label>
+  <br />
+
+  <input type='submit' class='btn green accent-4' />
+</form>
+
+<br />
+
+<h3 class='new-font'> Course List </h3>
+<!-- INDEX action -->
+<%= link_to 'Courses!', root_path, class: 'btn purple darken-4 right' %>
+<button id='get-users' class='btn purple darken-4'> Users! </button>
+<div id='users' class='row'>
+
+</div>
+</div>

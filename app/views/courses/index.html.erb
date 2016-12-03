@@ -1,0 +1,35 @@
+<div class='container'>
+
+<h1 class='new-font center'> Ajax Courses </h1>
+<hr />
+<!-- Create Action  -->
+<form id='add-course-form' method='POST' action='api/v1/courses'>
+  <label> Course Title </level>
+  <input id='course-title' type='text' name ='course[title]' required />
+  <br />
+
+  <label> Course Code </label>
+  <input id='course-code' type='text' name='course[code]' required />
+  <br />
+
+  <label> Course Description </label>
+  <textarea id='course-description' name ='course[description]'> </textarea>
+  <br />
+
+  <input type ='checkbox' id='course-active' name ='course[active]' />
+  <label for='course-active'>Course Active? </label>
+  <br />
+
+  <input type='submit' class='btn green accent-4' />
+</form>
+
+<br />
+
+<h3 class='new-font'> Course List </h3>
+<!-- INDEX action -->
+<%= link_to 'Users!', users_path, class: 'btn purple darken-4 right' %>
+<button id='get-courses' class='btn purple darken-4'> Courses! </button>
+<div id='courses' class='row'>
+
+</div>
+</div>
