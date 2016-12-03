@@ -19,8 +19,8 @@ $(document).ready(function() {
       dataType: 'JSON'
     }).success(function(data) {
       for(var i = 0; i < data.length; i++) {
-        var course = data[i];
-        $users.append('<div id=' + users.id + '>' + users.first_name + ' - <button class="btn cyan show-user"><i class="material-icons">visibility</i></button> <button class="btn orange accent-4 edit-user"><i class="material-icons">edit</i></button> <button class="btn red accent-4 delete-user"><i class="material-icons">delete</i></button>  </div>');
+        var user = data[i];
+        $users.append('<div id=' + user.id + '>' + user.first_name + ' - <button class="btn cyan show-user"><i class="material-icons">visibility</i></button> <button class="btn orange accent-4 edit-user"><i class="material-icons">edit</i></button> <button class="btn red accent-4 delete-user"><i class="material-icons">delete</i></button>  </div>');
       }
       // $courseForm.data('course-id');
     }).fail(function(data) {
@@ -37,14 +37,14 @@ $(document).ready(function() {
   		url: BASEURL + '/users/' + userId,
   		dataType: 'JSON'
   	}).success(function(data) {
-  		$userFirstName.val(data.firstName).focus();
-  		$userLastName.val(data.lastName);
-  		$userPhoneNumber.val(data.phoneNumber);
-  		if(!data.active) {
-  		  $userAlive.removeAttr('checked')
-  		} else {
-  		  $userAlive.attr('checked', data.alive);
-  		}
+  		$userFirstName.val(data.first_name).focus();
+  		$userLastName.val(data.last_name);
+  		$userPhoneNumber.val(data.phone_number);
+  		// if(!data.active) {
+  		//   $userAlive.removeAttr('checked')
+  		// } else {
+  		//   $userAlive.attr('checked', data.alive);
+  		// }
   		$userForm.attr('data-user-id', userId);
   	}).fail(function(data) {
   		console.log(data);
@@ -53,11 +53,35 @@ $(document).ready(function() {
   	// make sure the form handles a put
   });
 
-  $(document).on('click', '.show-user', function() {
   	// find the id of the course from the page
   	// make ajax call to get the data of that course
   	// fill in some div on the page with the course info
-  })
+  $(document).on('click', '.show-user', function() {
+    var userId = $(this).parent().attr('id');
+    $.ajax({
+      type:'GET',
+      url: BASEURL + '/users/' + userId,
+      dataType: 'JSON',
+    }).success(function(data) {
+      console.log('show')
+      var user = data
+      // $users.append("<div col s12 class='btn black'>" + user.first_name + " " + user.last_name + " " + user.phone_number + "</div>")
+      $users.append(
+        "<div class='row'>" +
+          "<div class='col s12 m6'>" +
+            "<div class='card blue-grey darken-1'>" +
+              "<div class='card-content white-text'>" +
+                "<span class='card-title'>" + "Name: " + user.first_name + " " + user.last_name + "</span>" +
+                "<p>" + "Phone Number: " + user.phone_number + "</p>" +
+              "</div>" +
+            "</div>" +
+          "</div>" +
+        "</div>"
+      )
+    }).fail(function(data) {
+      console.log(data);
+    });
+  });
 
   // ONLY for dynamic loaded elements!
   // when the elements aren't initially on the page
