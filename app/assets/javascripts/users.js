@@ -29,9 +29,9 @@ $(document).ready(function() {
   }
 
   $(document).on('click', '.edit-user', function() {
-  	// find the id of the course from the page
+  	// find the id of the user from the page
   	var userId = $(this).parent().attr('id');
-  	// make ajax call to get the data of that course
+  	// make ajax call to get the data of that user
   	$.ajax({
   		type: 'GET',
   		url: BASEURL + '/users/' + userId,
@@ -49,13 +49,10 @@ $(document).ready(function() {
   	}).fail(function(data) {
   		console.log(data);
   	});
-  	// fill in the form on the page
-  	// make sure the form handles a put
+
   });
 
-  	// find the id of the course from the page
-  	// make ajax call to get the data of that course
-  	// fill in some div on the page with the course info
+  var $users = $('#users');
   $(document).on('click', '.show-user', function() {
     var userId = $(this).parent().attr('id');
     $.ajax({
@@ -63,7 +60,6 @@ $(document).ready(function() {
       url: BASEURL + '/users/' + userId,
       dataType: 'JSON',
     }).success(function(data) {
-      console.log('show')
       var user = data
       // $users.append("<div col s12 class='btn black'>" + user.first_name + " " + user.last_name + " " + user.phone_number + "</div>")
       $users.append(
@@ -125,7 +121,6 @@ $(document).ready(function() {
   		data: { user: {first_name: $userFirstName.val(),
   		                 last_name: $userLastName.val(),
   		                 phone_number: $userPhoneNumber.val(),
-  		                //  alive: $userAlive.val()
   		                }}
   	}).success(function(data) {
   		// reset the form
